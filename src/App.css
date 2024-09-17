@@ -1,0 +1,49 @@
+.chatbot-container {
+  width: 350px;
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.message-list {
+  list-style: none;
+  padding: 0;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.user-message {
+  text-align: right;
+  color: #007bff; /* Blue for user messages */
+}
+
+.assistant-message {
+  text-align: left;
+  color: #4caf50; /* Green for assistant messages */
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-field {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.send-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
