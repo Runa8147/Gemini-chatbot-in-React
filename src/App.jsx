@@ -26,7 +26,7 @@ const App = () => {
     setUserInput('');
 
     try {
-      const API_KEY = "AIzaSyDKv4gjBMYe_OszgWMz7Lcns4900oVBhP0"; // Replace with your actual API key
+      const API_KEY = your_api_key_here; // Replace with your actual API key
       const genAI = new GoogleGenerativeAI(API_KEY);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
