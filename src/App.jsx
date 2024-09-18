@@ -27,7 +27,7 @@ const App = () => {
     setChatCount(prevCount => prevCount + 1);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       const result = await model.generateContent(userInput);
       const newAssistantMessage = { role: "assistant", content: result.response.text() };
       setMessages(prevMessages => [...prevMessages, newAssistantMessage]);

@@ -122,3 +122,26 @@ p {
 .message-list::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+/* Markdown styles */
+.message-list li.assistant pre {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.message-list li.assistant code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+}
+
+.message-list li.assistant p {
+  margin-bottom: 10px;
+}
+
+.message-list li.assistant ul, 
+.message-list li.assistant ol {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
