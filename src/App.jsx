@@ -10,6 +10,7 @@ const App = () => {
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [chatCount, setChatCount] = useState(0);
+  const [chatCount, setChatCount] = useState(0);
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
@@ -17,10 +18,13 @@ const App = () => {
 
   const handleSubmit = async () => {
     if (userInput.trim() === '' || chatCount >= 4) {
+    if (userInput.trim() === '' || chatCount >= 4) {
       return;
     }
 
     setIsLoading(true);
+    const newUserMessage = { role: "user", content: userInput };
+    setMessages(prevMessages => [...prevMessages, newUserMessage]);
     const newUserMessage = { role: "user", content: userInput };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
     setUserInput('');
@@ -34,6 +38,7 @@ const App = () => {
     } catch (error) {
       console.error("Error generating response:", error);
       setMessages(prevMessages => [...prevMessages, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
+      setMessages(prevMessages => [...prevMessages, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
     } finally {
       setIsLoading(false);
     }
@@ -43,6 +48,8 @@ const App = () => {
     <div className="chatbot-container">
       <h2>Chat Counter: {chatCount} (Max: 4)</h2>
       <ul className="message-list">
+        {messages.map((message, index) => (
+          <li key={index} className={message.role}>
         {messages.map((message, index) => (
           <li key={index} className={message.role}>
             <strong>{message.role}:</strong> {message.content}
@@ -57,7 +64,14 @@ const App = () => {
           onChange={handleInputChange}
           disabled={chatCount >= 4 || isLoading}
           onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+          disabled={chatCount >= 4 || isLoading}
+          onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
         />
+        <button 
+          className="send-button" 
+          onClick={handleSubmit} 
+          disabled={chatCount >= 4 || isLoading}
+        >
         <button 
           className="send-button" 
           onClick={handleSubmit} 
