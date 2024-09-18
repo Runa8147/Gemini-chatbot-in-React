@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import './styles.css';
 
-const API_KEY = "AIzaSyDKv4gjBMYe_OszgWMz7Lcns4900oVBhP0"; // Replace with your actual API key
+const API_KEY = "api_key"; // Replace with your actual API key
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const App = () => {
