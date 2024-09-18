@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import ReactMarkdown from 'react-markdown';
 import './styles.css';
 
 const API_KEY = "AIzaSyDKv4gjBMYe_OszgWMz7Lcns4900oVBhP0"; // Replace with your actual API key
@@ -10,7 +11,6 @@ const App = () => {
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [chatCount, setChatCount] = useState(0);
-  const [chatCount, setChatCount] = useState(0);
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
@@ -18,26 +18,22 @@ const App = () => {
 
   const handleSubmit = async () => {
     if (userInput.trim() === '' || chatCount >= 4) {
-    if (userInput.trim() === '' || chatCount >= 4) {
       return;
     }
 
     setIsLoading(true);
     const newUserMessage = { role: "user", content: userInput };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
-    const newUserMessage = { role: "user", content: userInput };
-    setMessages(prevMessages => [...prevMessages, newUserMessage]);
     setUserInput('');
     setChatCount(prevCount => prevCount + 1);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContent(userInput);
       const newAssistantMessage = { role: "assistant", content: result.response.text() };
       setMessages(prevMessages => [...prevMessages, newAssistantMessage]);
     } catch (error) {
       console.error("Error generating response:", error);
-      setMessages(prevMessages => [...prevMessages, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
       setMessages(prevMessages => [...prevMessages, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
     } finally {
       setIsLoading(false);
@@ -50,9 +46,12 @@ const App = () => {
       <ul className="message-list">
         {messages.map((message, index) => (
           <li key={index} className={message.role}>
-        {messages.map((message, index) => (
-          <li key={index} className={message.role}>
-            <strong>{message.role}:</strong> {message.content}
+            <strong>{message.role}:</strong>
+            {message.role === "assistant" ? (
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            ) : (
+              message.content
+            )}
           </li>
         ))}
       </ul>
@@ -64,14 +63,7 @@ const App = () => {
           onChange={handleInputChange}
           disabled={chatCount >= 4 || isLoading}
           onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-          disabled={chatCount >= 4 || isLoading}
-          onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
         />
-        <button 
-          className="send-button" 
-          onClick={handleSubmit} 
-          disabled={chatCount >= 4 || isLoading}
-        >
         <button 
           className="send-button" 
           onClick={handleSubmit} 
